@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    public function index()
-    {
-        $genre = Genre::get();
+	public function index()
+	{
+		$genre = Genre::get();
 
 
-    }
+	}
 }
