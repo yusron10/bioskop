@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -23,13 +24,15 @@ Route::get('/logout', [LoginController::class, 'keluar'])->middleware('auth');
 
 Route::get('/', [FilmController::class, 'index'])->middleware('auth');
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'admin']);
 
-Route::get('/create', [DashboardController::class, 'create']);
-Route::post('/create', [DashboardController::class, 'store']);
+Route::get('/create', [DashboardController::class, 'create'])->middleware(['auth', 'admin']);
+Route::post('/create', [DashboardController::class, 'store'])->middleware(['auth', 'admin']);
 
-Route::get('/edit/{id}', [DashboardController::class, 'edit']);
-Route::put('/edit/{id}', [DashboardController::class, 'update']);
+Route::get('/edit/{id}', [DashboardController::class, 'edit'])->middleware(['auth', 'admin']);
+Route::put('/edit/{id}', [DashboardController::class, 'update'])->middleware(['auth', 'admin']);
 
-Route::get('/hapus/{id}', [DashboardController::class, 'delete']);
-Route::delete('/hapus/{id}', [DashboardController::class, 'destroy']);
+Route::get('/hapus/{id}', [DashboardController::class, 'delete'])->middleware(['auth', 'admin']);
+Route::delete('/hapus/{id}', [DashboardController::class, 'destroy'])->middleware(['auth', 'admin']);
+
+Route::get('/dashboard-user', [UserController::class, 'index'])->middleware(['auth', 'admin']);

@@ -9,6 +9,8 @@ class GenreController extends Controller
 {
 	public function index()
 	{
+
+		
 		$genre = Genre::get();
 
 

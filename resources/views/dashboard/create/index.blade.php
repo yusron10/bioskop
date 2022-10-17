@@ -3,14 +3,14 @@
 
 @section ('background')
 
-	@if($errors->any())
-	<div class="alert alert-danger">
-		<ul>@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
-	</ul>
-	</div>
-	@endif
+@if($errors->any())
+<div class="alert alert-danger">
+  <ul>@foreach($errors->all() as $error)
+   <li>{{ $error }}</li>
+   @endforeach
+ </ul>
+</div>
+@endif
 
 <h1 class="text-center text-white mt-3">Tambah Data</h1>
 <form action="" method="POST" enctype="multipart/form-data">
@@ -40,9 +40,9 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="text-white form-label"> Image </label>
+      <label for="foto" class="text-white form-label"> Image </label>
       <div class="input-group">
-        <input type="file" class="form-control" id="image" name="image">
+        <input type="file" class="form-control" id="foto" name="foto">
       </div>
     </div>
 

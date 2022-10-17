@@ -32,9 +32,9 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="text-white form-label"> Image </label>
+      <label for="img" class="text-white form-label"> Image </label>
       <div class="input-group">
-        <input type="file" class="form-control" id="image" name="image">
+        <input type="file" class="form-control" id="img" name="img">
       </div>
     </div>
 

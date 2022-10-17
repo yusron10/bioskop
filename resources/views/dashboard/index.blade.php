@@ -1,13 +1,14 @@
 @extends ('layout.template')
-@section ('titll', 'Dashboard')
+@section ('title', 'Dashboard')
 @section ('background')
 @if(Session::has('status'))
 <div class="alert alert-success mt-3" role="alert">
 	{{ Session::get('message') }}
 </div>
 @endif
-<h1 class="text-white text-center">Ini halaman Dashboard</h1>
-<table class="table table-bordered table-striped table-dark" border="2">
+
+<h1 class="text-white text-center mt-3" style="font-family: Castellar">INI HALAMAN DASHBOARD</h1>
+<table class="table table-bordered table-striped table-dark mt-3" border="2">
     <thead>
         <tr class="text-white">
             <th>No</th>

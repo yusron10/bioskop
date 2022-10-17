@@ -1,0 +1,14 @@
+html,
+.font{
+	font-size: 14px;
+	
+}
+
+.card{
+	background-color: black;
+}
+
+h1 {
+	font-family: 'Gill Sans MT';
+	text-decoration: underline;
+}

@@ -27,9 +27,16 @@
           </li>
           <li class="nav-item">
             @if (Auth::user()->role_id != 1)
-                
+            
             @else
             <a class="nav-link" href="/dashboard">Dashboard</a>
+            @endif
+          </li>
+          <li class="nav-item">
+            @if (Auth::user()->role_id != 1)
+            
+            @else
+            <a class="nav-link" href="/dashboard-user">User</a>
             @endif
           </li>
         </ul>

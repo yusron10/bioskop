@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FilmRequest;
 use App\Models\Film;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\FilmRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -23,6 +24,19 @@ class DashboardController extends Controller
 
     public function store(FilmRequest $request)
     {
+        $newName = '';
+
+        if($request->file('foto')){
+
+            $extension = $request->file('foto')->getClientOriginalExtension();
+
+            $newName = $request->judul.'-'.now()->timestamp.'.'.$extension;
+
+            $request->file('foto')->storeAs('foto', $newName);
+
+        }
+        $request['image'] = $newName;
+
         $film = Film::create($request->all());
 
         if($film) {
@@ -44,9 +58,15 @@ class DashboardController extends Controller
 
     public function update(Request $request, $id)
     {
-        $film = Film::findOrFail($id);
-        $film->update($request->all());
-        if($film) {
+        $cover = '';
+        if ($request->file('img')) {
+            $newfoto = $request->file('img')->store('foto');
+            $request['image'] = basename($newfoto);
+            $cover = Film::findOrFail($id);
+            Storage::delete('foto/'.$cover->image);
+        }
+        $cover->update($request->all());
+        if($cover) {
             Session::flash('status', 'success');
             Session::flash('message', 'Berhasil Update Film ');
 
@@ -54,11 +74,14 @@ class DashboardController extends Controller
         return redirect('/dashboard');
     }
 
-    public function destroy($id)
+    public function destroy(Film $film, $id)
     {
-        $hancurkanData = Film::findOrFail($id);
-        $hancurkanData->delete();
-        if($hancurkanData) {
+        $film = Film::findOrFail($id);
+        if ($film->image) {
+            Storage::delete('foto/'.$film->image);
+        }
+        $film->delete();
+        if($film) {
             Session::flash('status', 'success');
             Session::flash('message', 'Berhasil Menghapus Film ');
 
