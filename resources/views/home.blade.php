@@ -7,20 +7,28 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}">
 
 <h1 class="text-center mt-3" style="color: aliceblue;"><b>Halaman Home</b></h1>
-<form action="">
-  
-  <select name="" id="">
-    @foreach ($genres as $fi)
-    <option value="{{ $fi->id }}">{{ $fi->name }}</option>
-    @endforeach
-  </select>
- 
+
+
+
+<form action="" method="get">
+  <div class="input-group">
+    <input type="text" class="form-control" name="keyword">
+    <button type="submit"> search</button>
+    <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" type="submit">Genre</button>
+    <ul class="dropdown-menu">
+      @foreach ($gs as $s)
+      <li><a href="/?keyword={{ $s->name }}" class="dropdown-item">{{ $s->name }} {{ count($s->film) }} Film</a></li>
+      <li><hr class="dropdown-divider"></li>
+      
+      @endforeach
+    </ul>
+  </div>
 </form>
+
+
 <div class="container-fluid">
   <div class="row">
     @foreach($films as $fs)
-    
-    
     
     <div class="col-md-4 mb-3 mt-4">
       <div class="card">
@@ -45,6 +53,10 @@
     </div>
     @endforeach 
   </div>
+</div>
+
+<div class="my-5">
+	{{ $films->withQueryString()->links() }}
 </div>
 
 @endsection

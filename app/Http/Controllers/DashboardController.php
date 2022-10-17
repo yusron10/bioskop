@@ -86,7 +86,7 @@ class DashboardController extends Controller
             Session::flash('message', 'Berhasil Menghapus Film ');
 
         }
-        return redirect('/dashboard')->with('success', 'Data berhasil Di Hancurkan');
+        return redirect('/dashboard');
     }
 
     public function delete($id)
