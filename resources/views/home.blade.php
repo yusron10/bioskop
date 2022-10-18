@@ -12,13 +12,16 @@
 
 <form action="" method="get">
   <div class="input-group">
-    <input type="text" class="form-control" name="keyword">
-    <button type="submit"> search</button>
     <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" type="submit">Genre</button>
     <ul class="dropdown-menu">
       @foreach ($gs as $s)
-      <li><a href="/?keyword={{ $s->name }}" class="dropdown-item">{{ $s->name }} {{ count($s->film) }} Film</a></li>
+      @if ( count($s->film) == 0)
+      <li class="dropdown-item" disabled>Film {{ $s->name }} Belum Tersedia </li>
       <li><hr class="dropdown-divider"></li>
+      @else
+      <li><a href="/?keyword={{ $s->name }}" class="dropdown-item"><b>{{ $s->name }}</b> ada {{ count($s->film) }} Film </a></li>
+      <li><hr class="dropdown-divider"></li>
+      @endif
       
       @endforeach
     </ul>
@@ -47,7 +50,21 @@
               {{ $fs->deskripsi }}
             </div>
           </div>
-          <a href="#" class="nav-link badge bg-secondary">Detail</a></p>
+          <button class="btn btn-primary"  style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .76rem;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            Contoh
+          </button>
+          <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ulasan</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div>
+                {{ $fs->deskripsi }}
+              </div>
+            </div>
+          </div>
+        </p>
         </div>
       </div>
     </div>
