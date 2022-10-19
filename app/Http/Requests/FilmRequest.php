@@ -26,7 +26,7 @@ class FilmRequest extends FormRequest
         return [
             'genre_id' => 'required',
             'judul' => 'required',
-            'tahun' => 'required|max:4',
+            'tahun' => 'required|max:4|unique:films',
             'deskripsi' => 'required'
         ];
     }

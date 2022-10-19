@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->unsignedBigInteger('genre_id')->after('id');
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('restrict');
+        Schema::table('ulasans', function (Blueprint $table) {
+            $table->unsignedBigInteger('film_id')->after('id');
+            $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
         });
     }
 
@@ -26,9 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->dropForeign(['genre_id']);
-            $table->dropColumn('genre_id');
+        Schema::table('ulasans', function (Blueprint $table) {
+            $table->dropForeign(['film_id']);
+            $table->dropColumn('film_id');
         });
     }
 };

@@ -36,3 +36,5 @@ Route::get('/hapus/{id}', [DashboardController::class, 'delete'])->middleware(['
 Route::delete('/hapus/{id}', [DashboardController::class, 'destroy'])->middleware(['auth', 'admin']);
 
 Route::get('/dashboard-user', [UserController::class, 'index'])->middleware(['auth', 'admin']);
+
+Route::post('/', [FilmController::class, 'createUlasan']);

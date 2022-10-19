@@ -12,3 +12,7 @@ h1 {
 	font-family: 'Gill Sans MT';
 	text-decoration: underline;
 }
+
+.comment-limit {
+	margin-left: 400;
+}

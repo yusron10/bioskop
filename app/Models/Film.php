@@ -15,4 +15,16 @@ class Film extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+    /**
+     * Get all of the comments for the Film
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ulasan()
+    {
+        return $this->hasMany(Ulasan::class, 'film_id', 'id');
+    }
+
+    
 }

@@ -3,8 +3,17 @@
 @section ('title', 'Home')
 
 @section('background')
-
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
+
+@if($errors->any())
+<div class="alert alert-danger mt-3 col-md-5 siuuu">
+  <ul>@foreach($errors->all() as $error)
+   <li>{{ $error }}</li>
+   @endforeach
+ </ul>
+</div>
+@endif
 
 <h1 class="text-center mt-3" style="color: aliceblue;"><b>Halaman Home</b></h1>
 
@@ -50,17 +59,31 @@
               {{ $fs->deskripsi }}
             </div>
           </div>
-          <button class="btn btn-primary"  style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .76rem;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <button class="btn btn-primary"  style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .76rem;" type="button" data-bs-toggle="offcanvas" data-bs-target="#contoh-{{ $fs->id }}" aria-controls="offcanvasExample">
             Contoh
           </button>
-          <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="contoh-{{ $fs->id }}" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ulasan</h5>
+              <h5 class="offcanvas-title" id="contoh-{{ $fs->id }}">Ulasan</h5>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
+             
+              <form action="" method="POST">
+                @csrf
+              <input type="hidden" name="film_id" id="film_id" value="{{ $fs->id }}">
+              <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+              <textarea name="name" id="name" cols="50" rows="10" class="bg-dark text-white" placeholder="add comment"></textarea><br>
+              <button type="submit" class="btn btn-primary">Create</button>
+
+              
+            </form>
+              @foreach ($fs->ulasan as $i)
+              
+                 <b>{{ $i->user->name }}:</b> <br> {{ $i->name }} <br>
+              @endforeach
+              
               <div>
-                {{ $fs->deskripsi }}
               </div>
             </div>
           </div>
@@ -75,5 +98,6 @@
 <div class="my-5">
 	{{ $films->withQueryString()->links() }}
 </div>
+
 
 @endsection
