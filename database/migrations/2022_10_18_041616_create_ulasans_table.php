@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->text('isi');
             $table->timestamps();
         });
     }

@@ -68,19 +68,18 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-             
               <form action="" method="POST">
                 @csrf
               <input type="hidden" name="film_id" id="film_id" value="{{ $fs->id }}">
               <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-              <textarea name="name" id="name" cols="50" rows="10" class="bg-dark text-white" placeholder="add comment"></textarea><br>
+              <textarea name="isi" id="isi" cols="50" rows="10" class="bg-dark text-white" placeholder="add comment"></textarea><br>
               <button type="submit" class="btn btn-primary">Create</button>
 
               
             </form>
               @foreach ($fs->ulasan as $i)
               
-                 <b>{{ $i->user->name }}:</b> <br> {{ $i->name }} <br>
+                 <b>{{ $i->user->name }}:</b> <br> {{ $i->isi }} <br>
               @endforeach
               
               <div>
