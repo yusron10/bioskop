@@ -70,18 +70,33 @@
             <div class="offcanvas-body">
               <form action="" method="POST">
                 @csrf
-              <input type="hidden" name="film_id" id="film_id" value="{{ $fs->id }}">
-              <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-              <textarea name="isi" id="isi" cols="50" rows="10" class="bg-dark text-white" placeholder="add comment"></textarea><br>
-              <button type="submit" class="btn btn-primary">Create</button>
+                <div class="row">
+                  <div class="col-lg-12">
+                  <div class="star-rating">
+                    <span class="bi bi-star" data-rating="1"></span>
+                    <span class="bi bi-star" data-rating="2"></span>
+                    <span class="bi bi-star" data-rating="3"></span>
+                    <span class="bi bi-star" data-rating="4"></span>
+                    <span class="bi bi-star" data-rating="5"></span>
+                    <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                  </div>
+                </div>
+              </div>
+                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="film_id" id="film_id" value="{{ $fs->id }}">
+                <textarea name="isi" id="isi" cols="50" rows="10" class="bg-dark text-white"></textarea>
+                <button type="submit" class="btn btn-primary">Comment</button>
+              </form><br>
+                
+               @forelse ($fs->ulasan as $k)
+               <b>{{ $k->user->name }}:</b> <br> {{ $k->isi }} <br>
 
-              
-            </form>
-              @foreach ($fs->ulasan as $i)
-              
-                 <b>{{ $i->user->name }}:</b> <br> {{ $i->isi }} <br>
-              @endforeach
-              
+               @empty
+
+               <strong>No Comment</strong>
+                   
+               @endforelse
+                 
               <div>
               </div>
             </div>
@@ -97,6 +112,30 @@
 <div class="my-5">
 	{{ $films->withQueryString()->links() }}
 </div>
+
+<script>
+  var $star_rating = $('.star-rating .bi');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('bi-star').addClass('bi-star-fill');
+    } else {
+      return $(this).removeClass('bi-star-fill').addClass('bi-star');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+$(document).ready(function() {
+
+});
+</script>
 
 
 @endsection

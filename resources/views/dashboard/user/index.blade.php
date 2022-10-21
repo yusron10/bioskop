@@ -19,7 +19,7 @@
             <td>{{ $s->name }}</td>
             <td>{{ $s->email}}</td>
             <td>
-                <a href="/hapus/{{ $s->id }}" class="badge bg-dark nav-link">Delete</a>
+                <a href="/dashboard-user/{{ $s->id }}" class="badge bg-dark nav-link " onclick="return confirm('Antum Yakin?')">Delete</a>
             </td>
         </tr>
         @endforeach

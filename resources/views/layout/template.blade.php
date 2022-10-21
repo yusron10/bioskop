@@ -7,6 +7,9 @@
   <title>@yield('title')</title>
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+{{-- Siuuuu icon --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </head>
 <style>
   body {
@@ -38,6 +41,9 @@
             @else
             <a class="nav-link" href="/dashboard-user">User</a>
             @endif
+          </li>
+          <li class="nav-item">
+            <a href="/history/{{ Auth::user()->id }}" class="nav-link">History</a>
           </li>
           
         </ul>

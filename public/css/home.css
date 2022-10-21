@@ -16,3 +16,10 @@ h1 {
 .comment-limit {
 	margin-left: 400;
 }
+
+.star-rating {
+	line-height:32px;
+	font-size:1.25em;
+  }
+
+ .star-rating .bi-star{color: yellow;}

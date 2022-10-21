@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -36,5 +37,8 @@ Route::get('/hapus/{id}', [DashboardController::class, 'delete'])->middleware(['
 Route::delete('/hapus/{id}', [DashboardController::class, 'destroy'])->middleware(['auth', 'admin']);
 
 Route::get('/dashboard-user', [UserController::class, 'index'])->middleware(['auth', 'admin']);
+Route::get('/dashboard-user/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'admin']);
+Route::delete('/dashboard-user/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'admin']);
+Route::post('/', [FilmController::class, 'createUlasan'])->middleware('auth');
 
-Route::post('/', [FilmController::class, 'createUlasan']);
+Route::get('/history/{id}', [HistoryController::class, 'index'])->middleware('auth');

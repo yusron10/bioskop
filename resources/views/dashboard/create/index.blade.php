@@ -13,6 +13,7 @@
 @endif
 
 <h1 class="text-center text-white mt-3">Tambah Data</h1>
+
 <form action="" method="POST" enctype="multipart/form-data">
   
   @csrf

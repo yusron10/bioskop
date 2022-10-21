@@ -18,11 +18,9 @@ class FilmController extends Controller
 			$query->where('name', 'LIKE', '%'.$keyword.'%');
 		})->paginate(2);
 
-		$ul = Film::with('ulasan')->get();
 
 
-
-		return view('home', ['films' => $film, 'gs' => $g, 'ul' => $ul]);
+		return view('home', ['films' => $film, 'gs' => $g]);
 	}
 	
 	public function createUlasan(Request $request)
