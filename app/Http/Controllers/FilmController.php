@@ -14,7 +14,7 @@ class FilmController extends Controller
 	{
 		$keyword = $request->keyword;
 		$g = Genre::select('id', 'name')->with('film')->get();
-		$film = Film::with(['genre', 'ulasan'])->where('judul', 'LIKE', '%'.$keyword.'%')->orWherehas('genre', function($query) use($keyword){
+		$film = Film::with(['tag','genre', 'ulasan'])->where('judul', 'LIKE', '%'.$keyword.'%')->orWherehas('genre', function($query) use($keyword){
 			$query->where('name', 'LIKE', '%'.$keyword.'%');
 		})->paginate(2);
 

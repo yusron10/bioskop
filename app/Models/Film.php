@@ -26,5 +26,15 @@ class Film extends Model
         return $this->hasMany(Ulasan::class, 'film_id', 'id');
     }
 
+    /**
+     * The roles that belong to the Film
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class, 'pivot', 'film_id', 'tag_id');
+    }
+
     
 }

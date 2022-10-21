@@ -60,8 +60,14 @@
             </div>
           </div>
           <button class="btn btn-primary"  style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .76rem;" type="button" data-bs-toggle="offcanvas" data-bs-target="#contoh-{{ $fs->id }}" aria-controls="offcanvasExample">
-            Contoh
-          </button>
+            Kumpulan Orang Berkomentar
+          </button> <br> <br>
+          <button class="btn btn-success" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .76rem;" disabled>
+            Tags Cuy : 
+          </button> <br>
+          @foreach ($fs->tag as $o)
+              <span class="text-dark badge bg-info">{{ $o->pagar }}</span>
+          @endforeach
           <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="contoh-{{ $fs->id }}" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="contoh-{{ $fs->id }}">Ulasan</h5>
