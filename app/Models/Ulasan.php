@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ulasan extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'film_id', 'isi'];
+    protected $fillable = ['user_id', 'film_id', 'isi', 'rating_star'];
 
     /**
      * Get the user that owns the Ulasan

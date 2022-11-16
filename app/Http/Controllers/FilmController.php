@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-use App\Models\User;
 use App\Models\Genre;
 use App\Models\Ulasan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class FilmController extends Controller
 {
@@ -25,8 +26,16 @@ class FilmController extends Controller
 	
 	public function createUlasan(Request $request)
 	{
-		 Ulasan::create($request->all());
-
+		if($request['isi'] == []) {
+			return redirect('/')->with('this-doesnt-work', 'ANTUM GAK NGISI RABUN KAH?');
+		}
+		if (Ulasan::where('film_id', $request->film_id)->where('user_id', Auth::id())->first()) {
+			return redirect('/')->with('message', 'ANTUM SUDAH KOMEN');
+		}
+		 $pusing = Ulasan::create($request->all());
+		 if ($pusing) {
+			Session::flash('message', 'Entahlah');
+		 }
 		 return redirect('/');
 	}
 }

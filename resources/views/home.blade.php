@@ -15,6 +15,24 @@
 </div>
 @endif
 
+@if(Session::has('message'))
+<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+  {{ Session::get('message') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    
+@endif
+
+
+@if(Session::has('this-doesnt-work'))
+
+<div class="alert alert-secondary alert-dismissible fade show mt-2" role="alert">
+  {{ Session::get('this-doesnt-work') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    
+@endif
+
 <h1 class="text-center mt-3" style="color: aliceblue;"><b>Halaman Home</b></h1>
 
 
@@ -73,28 +91,37 @@
               <h5 class="offcanvas-title" id="contoh-{{ $fs->id }}">Ulasan</h5>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+            <style>
+              .bi {
+                color: yellow;
+              }
+            </style>
             <div class="offcanvas-body">
               <form action="" method="POST">
                 @csrf
                 <div class="row">
                   <div class="col-lg-12">
-                  <div class="star-rating">
-                    <span class="bi bi-star" data-rating="1"></span>
-                    <span class="bi bi-star" data-rating="2"></span>
-                    <span class="bi bi-star" data-rating="3"></span>
-                    <span class="bi bi-star" data-rating="4"></span>
-                    <span class="bi bi-star" data-rating="5"></span>
-                    <input type="hidden" name="whatever1" class="rating-value" value="2.56">
-                  </div>
+                    <i class="bi bi-star-fill"></i>
+                  <select name="rating_star" id="" class="bg-dark text-white mx-2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+
+                  </select>
                 </div>
               </div>
+              <div class="mt-3">
                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="film_id" id="film_id" value="{{ $fs->id }}">
                 <textarea name="isi" id="isi" cols="50" rows="10" class="bg-dark text-white"></textarea>
                 <button type="submit" class="btn btn-primary">Comment</button>
-              </form><br>
+              </form></div>
                 
                @forelse ($fs->ulasan as $k)
+               <br>
+               <i class="bi bi-star-fill"></i> <b>{{ $k->rating_star }}</b><br>
                <b>{{ $k->user->name }}:</b> <br> {{ $k->isi }} <br>
 
                @empty
@@ -118,30 +145,6 @@
 <div class="my-5">
 	{{ $films->withQueryString()->links() }}
 </div>
-
-<script>
-  var $star_rating = $('.star-rating .bi');
-
-var SetRatingStar = function() {
-  return $star_rating.each(function() {
-    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-      return $(this).removeClass('bi-star').addClass('bi-star-fill');
-    } else {
-      return $(this).removeClass('bi-star-fill').addClass('bi-star');
-    }
-  });
-};
-
-$star_rating.on('click', function() {
-  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-  return SetRatingStar();
-});
-
-SetRatingStar();
-$(document).ready(function() {
-
-});
-</script>
 
 
 @endsection
