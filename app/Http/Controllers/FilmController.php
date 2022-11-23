@@ -32,6 +32,9 @@ class FilmController extends Controller
 		if (Ulasan::where('film_id', $request->film_id)->where('user_id', Auth::id())->first()) {
 			return redirect('/')->with('message', 'ANTUM SUDAH KOMEN');
 		}
+		if ($request['rating_star'] > 5) {
+			return redirect('/')->with('this-doesnt-work', 'Saya Tidak BODOH');
+		}
 		 $pusing = Ulasan::create($request->all());
 		 if ($pusing) {
 			Session::flash('message', 'Entahlah');

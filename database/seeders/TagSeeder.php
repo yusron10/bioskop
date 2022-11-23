@@ -21,9 +21,9 @@ class TagSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $tag = [
-            ['name' => 'gk ngeri'],
-            ['name' => 'mengerikan'],
-            ['name' => 'lucu']
+            ['pagar' => 'gk ngeri'],
+            ['pagar' => 'mengerikan'],
+            ['pagar' => 'lucu']
         ];
         
         foreach ($tag as $t) {
