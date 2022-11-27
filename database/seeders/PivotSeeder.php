@@ -21,16 +21,16 @@ class PivotSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $pivot = [
-            ['movie_id' => 1, 'tag_id' => 1],
-            ['movie_id' => 1, 'tag_id' => 2],
-            ['movie_id' => 2, 'tag_id' => 3]
+            ['film_id' => 1, 'tag_id' => 1],
+            ['film_id' => 1, 'tag_id' => 2],
+            ['film_id' => 2, 'tag_id' => 3]
             
             
         ];
         
         foreach ($pivot as $p) {
             Pivot::create([
-                'movie_id' => $p['movie_id'],
+                'film_id' => $p['film_id'],
                 'tag_id' => $p['tag_id']
             ]);
         }
